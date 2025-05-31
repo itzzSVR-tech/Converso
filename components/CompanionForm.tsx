@@ -1,64 +1,63 @@
-"use client";
+"use client"
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    // FormDescription,
+    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select";
-import { subjects } from "@/constants";
-import { Textarea } from "@/components/ui/textarea";
-import { createCompanion } from "@/lib/actions/companion.actions";
-import { redirect } from "next/navigation";
+} from "@/components/ui/select"
+import {subjects} from "@/constants";
+import {Textarea} from "@/components/ui/textarea";
+import {createCompanion} from "@/lib/actions/companion.actions";
+import {redirect} from "next/navigation";
 
 const formSchema = z.object({
-    name: z.string().min(1, { message: "Companion is required." }),
-    subject: z.string().min(1, { message: "Subject is required." }),
-    topic: z.string().min(1, { message: "Topic is required." }),
-    voice: z.string().min(1, { message: "Voice is required." }),
-    style: z.string().min(1, { message: "Style is required." }),
-    duration: z.coerce.number().min(1, { message: "Duration is required." }),
-});
+    name: z.string().min(1, { message: 'Companion is required.'}),
+    subject: z.string().min(1, { message: 'Subject is required.'}),
+    topic: z.string().min(1, { message: 'Topic is required.'}),
+    voice: z.string().min(1, { message: 'Voice is required.'}),
+    style: z.string().min(1, { message: 'Style is required.'}),
+    duration: z.coerce.number().min(1, { message: 'Duration is required.'}),
+})
 
 const CompanionForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            subject: "",
-            topic: "",
-            voice: "",
-            style: "",
+            name: '',
+            subject: '',
+            topic: '',
+            voice: '',
+            style: '',
             duration: 15,
         },
-    });
+    })
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        // console.log("Form submitted with values:", values);
         const companion = await createCompanion(values);
 
-        if (companion) {
+        if(companion) {
             redirect(`/companions/${companion.id}`);
         } else {
-            console.log("Failed to create a companion");
-            redirect("/");
+            console.log('Failed to create a companion');
+            redirect('/');
         }
-    };
+    }
 
     return (
         <Form {...form}>
@@ -117,9 +116,7 @@ const CompanionForm = () => {
                     name="topic"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>
-                                What should the companion help with?
-                            </FormLabel>
+                            <FormLabel>What should the companion help with?</FormLabel>
                             <FormControl>
                                 <Textarea
                                     placeholder="Ex. Derivates & Integrals"
@@ -145,7 +142,9 @@ const CompanionForm = () => {
                                     defaultValue={field.value}
                                 >
                                     <SelectTrigger className="input">
-                                        <SelectValue placeholder="Select the voice" />
+                                        <SelectValue
+                                            placeholder="Select the voice"
+                                        />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="male">
@@ -174,7 +173,9 @@ const CompanionForm = () => {
                                     defaultValue={field.value}
                                 >
                                     <SelectTrigger className="input">
-                                        <SelectValue placeholder="Select the style" />
+                                        <SelectValue
+                                            placeholder="Select the style"
+                                        />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="formal">
@@ -196,9 +197,7 @@ const CompanionForm = () => {
                     name="duration"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>
-                                Estimated session duration in minutes
-                            </FormLabel>
+                            <FormLabel>Estimated session duration in minutes</FormLabel>
                             <FormControl>
                                 <Input
                                     type="number"
@@ -211,15 +210,10 @@ const CompanionForm = () => {
                         </FormItem>
                     )}
                 />
-                <Button
-                    type="submit"
-                    className="w-full cursor-pointer bg-[#fe5933]"
-                >
-                    Build Companion
-                </Button>
+                <Button type="submit" className="w-full cursor-pointer">Build Your Companion</Button>
             </form>
         </Form>
-    );
-};
+    )
+}
 
-export default CompanionForm;
+export default CompanionForm
