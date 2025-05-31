@@ -1,15 +1,16 @@
+import {getAllCompanions} from "@/lib/actions/companion.actions";
 import CompanionCard from "@/components/CompanionCard";
+import {getSubjectColor} from "@/lib/utils";
 import SearchInput from "@/components/SearchInput";
 import SubjectFilter from "@/components/SubjectFilter";
-import { getAllCompanions } from "@/lib/actions/companion.actions";
-import { getSubjectColor } from "@/lib/utils";
 
 const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
     const filters = await searchParams;
-    const subject = filters.subject ? filters.subject : "";
-    const topic = filters.topic ? filters.topic : "";
+    const subject = filters.subject ? filters.subject : '';
+    const topic = filters.topic ? filters.topic : '';
 
     const companions = await getAllCompanions({ subject, topic });
+
     return (
         <main>
             <section className="flex justify-between gap-4 max-sm:flex-col">
@@ -29,7 +30,7 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
                 ))}
             </section>
         </main>
-    );
-};
+    )
+}
 
-export default CompanionsLibrary;
+export default CompanionsLibrary
