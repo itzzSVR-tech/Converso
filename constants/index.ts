@@ -17,7 +17,7 @@ export const subjectsColors = {
     coding: "#FFC8E4",
     history: "#FFECC8",
     economics: "#C8FFDF",
-    architecture: "#dedede",
+    architect: "#dedede",
     IoT: "#FFC800",
     music: "#FFB6C1",
 };
