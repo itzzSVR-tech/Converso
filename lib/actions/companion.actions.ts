@@ -4,6 +4,7 @@ import {auth} from "@clerk/nextjs/server";
 import {createSupabaseClient} from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 
+// Function to create a new companion
 export const createCompanion = async (formData: CreateCompanion) => {
     const { userId: author } = await auth();
     const supabase = createSupabaseClient();
@@ -18,6 +19,7 @@ export const createCompanion = async (formData: CreateCompanion) => {
     return data[0];
 }
 
+// Function to get all companions with optional filters
 export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }: GetAllCompanions) => {
     const supabase = createSupabaseClient();
 

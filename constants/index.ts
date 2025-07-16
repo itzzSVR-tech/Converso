@@ -8,6 +8,7 @@ export const subjects = [
     "architect",
     "IoT",
     "music",
+    "cooking",
 ];
 
 export const subjectsColors = {
@@ -20,6 +21,7 @@ export const subjectsColors = {
     architect: "#dedede",
     IoT: "#FFC800",
     music: "#FFB6C1",
+    cooking: "#6CDDE6",
 };
 
 export const voices = {
